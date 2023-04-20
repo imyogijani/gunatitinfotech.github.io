@@ -522,25 +522,25 @@
                         <div class="row g-3">
                             <div class="col-sm-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="Your Name">
                                     <label for="name">Your Name</label>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" id="mail" placeholder="Your Email">
+                                    <input type="email" class="form-control" name="mail" id="mail" placeholder="Your Email">
                                     <label for="mail">Your Email</label>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="mobile" placeholder="Your Mobile">
+                                    <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Your Mobile">
                                     <label for="mobile">Your Mobile</label>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-floating">
-                                    <select class="form-select" id="service">
+                                    <select class="form-select" name="service" id="service">
                                         <option selected>Digital Marketing</option>
                                         <option value="">Social Marketing</option>
                                         <option value="">Content Marketing</option>
@@ -551,7 +551,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a message here" id="message"
+                                    <textarea class="form-control" placeholder="Leave a message here" name="message" id="message"
                                         style="height: 130px"></textarea>
                                     <label for="message">Message</label>
                                 </div>
@@ -560,8 +560,7 @@
                                 <button class="btn btn-primary w-100 py-3" type="submit">Submit Now</button>
                             </div>
                         </div>
-                    </form>
-                    <?php
+                        <?php
                         $servername = "localhost";
                         $username = "root";
                         $password = "";
@@ -574,19 +573,17 @@
                           }
 
                           if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                            // Get form data
                             $name = $_POST["name"];
                             $mail = $_POST["mail"];
                             $mobile = $_POST["mobile"];
                             $service = $_POST["service"];
                             $message = $_POST["message"];
                           
-                            // Insert data into database
                             $sql = "INSERT INTO contact (name, mail, mobile, service, message)
                                     VALUES ('$name', '$mail', '$mobile', '$service', '$message')";
                           
                             if (mysqli_query($conn, $sql)) {
-                              echo "Data saved successfully!";
+                              echo "Your request is accepted our employee will contact you soon...!";
                             } else {
                               echo "Error: " . $sql . "<br>" . mysqli_error($conn);
                             }
@@ -594,6 +591,7 @@
 
                         mysqli_close($conn);
                     ?>
+                    </form>
                 </div>
             </div>
         </div>
