@@ -517,9 +517,9 @@
                     </a>
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <h2 class="mb-4">Get A Free Demo</h2>
-                    <div class="row g-3">
-                        <form action="POST">
+                    <form method="post">
+                        <h2 class="mb-4">Get A Free Demo</h2>
+                        <div class="row g-3">
                             <div class="col-sm-6">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="name" placeholder="Your Name">
@@ -559,11 +559,41 @@
                             <div class="col-12 text-center">
                                 <button class="btn btn-primary w-100 py-3" type="submit">Submit Now</button>
                             </div>
-                        </form>
-                        <?php
-                        
-                        ?>
-                    </div>
+                        </div>
+                    </form>
+                    <?php
+                        $servername = "localhost";
+                        $username = "root";
+                        $password = "";
+                        $dbname = "gunatitinfotech";
+
+                        $conn = mysqli_connect($servername, $username, $password, $dbname);
+
+                        if (!$conn) {
+                            die("Connection failed: " . mysqli_connect_error());
+                          }
+
+                          if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                            // Get form data
+                            $name = $_POST["name"];
+                            $mail = $_POST["mail"];
+                            $mobile = $_POST["mobile"];
+                            $service = $_POST["service"];
+                            $message = $_POST["message"];
+                          
+                            // Insert data into database
+                            $sql = "INSERT INTO contact (name, mail, mobile, service, message)
+                                    VALUES ('$name', '$mail', '$mobile', '$service', '$message')";
+                          
+                            if (mysqli_query($conn, $sql)) {
+                              echo "Data saved successfully!";
+                            } else {
+                              echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                            }
+                          }
+
+                        mysqli_close($conn);
+                    ?>
                 </div>
             </div>
         </div>
